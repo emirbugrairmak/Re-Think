@@ -1,71 +1,48 @@
-# Sürdürülebilirlik Chatbot API
+# Sürdürülebilirlik Chatbot
 
-Bu proje, döngüsel ekonomi ilkelerine göre yanıt veren bir chatbot API'sidir. FastAPI kullanılarak geliştirilmiştir ve Google'ın Gemini API'sini kullanmaktadır.
+Bu proje, sürdürülebilirlik temalı bir chatbot uygulamasıdır. Kullanıcıların sorularını döngüsel ekonomi çerçevesinde değerlendirir ve 9R ilkelerine göre yanıtlar üretir.
+
+## Proje Yapısı
+
+Proje iki ana bileşenden oluşmaktadır:
+
+- `backend/`: FastAPI tabanlı REST API
+- `frontend/`: Kullanıcı arayüzü (henüz geliştirilmedi)
 
 ## Kurulum
 
-1. Projeyi klonlayın:
-```bash
-git clone [repo-url]
-cd [repo-name]
-```
+### Backend
 
-2. Sanal ortam oluşturun ve aktifleştirin:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-# veya
-.venv\Scripts\activate  # Windows
-```
+Backend kurulumu için `backend/README.md` dosyasına bakın.
 
-3. Gerekli paketleri yükleyin:
-```bash
-pip install -r requirements.txt
-```
+### Frontend
 
-4. `.env` dosyasını oluşturun ve Gemini API anahtarınızı ekleyin:
-```
-GOOGLE_API_KEY=your_api_key_here
-```
+Frontend kurulumu için `frontend/README.md` dosyasına bakın. (Frontend geliştirildiğinde eklenecek)
 
-## Kullanım
+## Özellikler
 
-1. API'yi başlatın:
-```bash
-uvicorn main:app --reload
-```
+- Kullanıcı dostu arayüz
+- Döngüsel ekonomi ilkelerine göre özelleştirilmiş yanıtlar
+- Gemini AI entegrasyonu
+- Gerçek zamanlı yanıtlar
 
-2. API'ye erişin:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+## Geliştirme
 
-## API Endpoint'leri
+### Backend
 
-- `POST /chat`: Kullanıcı mesajını alır ve 9R ilkelerine göre yanıt verir
-- `GET /`: API hakkında bilgi verir
+Backend geliştirmesi için:
+1. `backend` klasörüne gidin
+2. Sanal ortamı aktifleştirin
+3. Gerekli paketleri yükleyin
+4. API'yi başlatın
 
-## Örnek Kullanım
+### Frontend
 
-```python
-import requests
+Frontend geliştirmesi için:
+1. `frontend` klasörüne gidin
+2. Gerekli bağımlılıkları yükleyin
+3. Geliştirme sunucusunu başlatın
 
-response = requests.post(
-    "http://localhost:8000/chat",
-    json={"message": "Eski tişörtlerimi nasıl değerlendirebilirim?"}
-)
+## Lisans
 
-print(response.json())
-```
-
-## 9R İlkeleri
-
-- R0: Reddet
-- R1: Yeniden düşün
-- R2: Azalt
-- R3: Yeniden kullanım
-- R4: Onar
-- R5: Yeniden üret
-- R6: Geri dönüştür
-- R7: Geri kazan
-- R8: Yeniden tasarla
-- R9: Bertaraf 
+Bu proje MIT lisansı altında lisanslanmıştır. 
