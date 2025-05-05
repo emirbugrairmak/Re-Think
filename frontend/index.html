@@ -213,14 +213,9 @@ Sana daha sürdürülebilir ve doğaya dost seçenekler sunmak için buradayım!
             const jsonResponse = JSON.parse(cleanResponse);
             
             // HTML formatında yanıt oluştur
-            let formattedResponse = '<div style="font-family: Arial, sans-serif;">';
+            let formattedResponse = '<div style="font-family: Arial, sans-serif; line-height: 1.2;">';
             for (const [key, value] of Object.entries(jsonResponse)) {
-              formattedResponse += `
-                <div style="margin-bottom: 15px;">
-                  <h3 style="color: #2f3e46; margin-bottom: 5px;">${key}</h3>
-                  <p style="margin: 0; line-height: 1.5;">${value}</p>
-                </div>
-              `;
+              formattedResponse += `<div style="margin-bottom: 8px;"><strong style="color: #2f3e46;">${key}:</strong> ${value}</div>`;
             }
             formattedResponse += '</div>';
             
