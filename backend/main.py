@@ -1,32 +1,28 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from typing import List
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 import json
-from fastapi.middleware.cors import CORSMiddleware
 
 # .env dosyasını yükle
 load_dotenv()
 
-# Gemini API anahtarını ayarla
+# Gemini API anahtarını al
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
-    raise ValueError("GOOGLE_API_KEY bulunamadı. Lütfen .env dosyasında tanımlayın.")
+    raise ValueError("GOOGLE_API_KEY environment variable is not set")
+
+# Gemini API'yi yapılandır
 genai.configure(api_key=GOOGLE_API_KEY)
 
-# Mevcut modelleri listele
-print("Mevcut modeller:")
-for m in genai.list_models():
-    print(f"- {m.name}")
-
-app = FastAPI(title="Sürdürülebilirlik Chatbot")
+app = FastAPI()
 
 # CORS ayarları
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Geliştirme için tüm originlere izin ver
+    allow_origins=["http://localhost:3000"],  # Frontend'in çalıştığı adres
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -105,10 +101,44 @@ def generate_circular_economy_response(user_message: str) -> CircularEconomyResp
         print(f"Gemini API Hatası: {str(e)}")  # Hata detayını konsola yazdır
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/chat", response_model=CircularEconomyResponse)
-async def chat(user_message: UserMessage):
-    return generate_circular_economy_response(user_message.message)
+class ChatRequest(BaseModel):
+    message: str
+
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    try:
+        # Modeli oluştur
+        model = genai.GenerativeModel('gemini-2.0-flash')
+        
+        # 9R ilkelerine göre yanıt vermesi için prompt oluştur
+        prompt = f"""
+        Kullanıcının sorusu: {request.message}
+        
+        Lütfen bu soruyu döngüsel ekonomi çerçevesinde değerlendir ve 9R ilkelerine göre yanıt ver.
+        Her R için kısa ve yaratıcı bir öneri yaz. Yanıtı JSON formatında ver.
+        
+        Format:
+        {{
+            "Reddet": "Reddet önerisi",
+            "Yeniden Düşün": "Yeniden düşün önerisi",
+            "Azalt": "Azalt önerisi",
+            "Yeniden Kullanım": "Yeniden kullanım önerisi",
+            "Onar": "Onar önerisi",
+            "Yeniden Üret": "Yeniden üret önerisi",
+            "Geri Dönüştür": "Geri dönüştür önerisi",
+            "Geri Kazan": "Geri kazan önerisi",
+            "Yeniden Tasarla": "Yeniden tasarla önerisi",
+            "Bertaraf": "Bertaraf önerisi"
+        }}
+        """
+        
+        # Kullanıcı mesajını al ve Gemini'ye gönder
+        response = model.generate_content(prompt)
+        return {"response": response.text}
+    except Exception as e:
+        print(f"Error: {str(e)}")  # Hata detayını konsola yazdır
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/")
 async def root():
-    return {"message": "Sürdürülebilirlik Chatbot API'sine Hoş Geldiniz!"} 
+    return {"message": "Döngüsel Ekonomi Chatbot API'sine Hoş Geldiniz!"} 

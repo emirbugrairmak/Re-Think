@@ -1,0 +1,264 @@
+<html lang="tr"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Re-Think</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #cce3de, #eaf4f4);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      margin-top: 40px;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #2f3e46;
+      text-shadow: 1px 1px 2px #aaa;
+    }
+
+    .typing {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      border-right: 2px solid;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 6s steps(60, end) forwards, blink 1s infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      resize: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #52796f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #354f52;
+    }
+
+    .response {
+      margin-top: 40px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      white-space: pre-wrap;
+    }
+
+    .diagonal-section {
+      margin-top: 80px;
+      width: 100%;
+      background: linear-gradient(135deg, #e1edea 50%, #ffffff 50%);
+      padding: 80px 20px;
+    }
+
+    .blog-content {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .blog-content h2 {
+      color: #2f3e46;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .blog-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .blog-content th, .blog-content td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .blog-content th {
+      background-color: #cad2c5;
+    }
+
+    .blog-content td:first-child {
+      font-weight: bold;
+      color: #354f52;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Re-Think</header>
+  <div class="typing">Merhaba ben Re-Think. İhtiyacın olan her şey için daha çevre dostu bir yol olabilir.
+Sana daha sürdürülebilir ve doğaya dost seçenekler sunmak için buradayım! Hadi Başlayalım :)</div>
+
+  <div class="container">
+    <textarea id="userInput" placeholder="Geri dönüşüm hakkında sorularını bekliyorum..."></textarea>
+    <button onclick="sendToGemini()">Gönder</button>
+
+    <div class="response" id="responseArea">
+      <!-- API'den gelen cevap burada gösterilecek -->
+    </div>
+  </div>
+
+  <section class="diagonal-section">
+    <div class="blog-content">
+      <h2>Döngüsel Ekonominin 9R İlkesi</h2>
+      <p><strong>Ürün Kullanımı ve Üretimi Hakkında:</strong></p>
+      <table>
+        <tbody><tr><th>İlke</th><th>Açıklama</th></tr>
+        <tr><td>R0: Reddetmek (Refuse)</td><td>Aynı işlevi farklı bir ürünle sunmak ya da işlevden vazgeçmek. Ürünü gereksiz hale getirmek.</td></tr>
+        <tr><td>R1: Yeniden Düşünmek (Rethink)</td><td>Ürün kullanımını daha yoğun hale getirmek (örn. ürünü paylaşmak).</td></tr>
+        <tr><td>R2: Azaltmak (Reduce)</td><td>Daha az doğal kaynak ve malzeme kullanımıyla ürün üretmek, kullanımda verimliliği artırmak.</td></tr>
+      </tbody></table>
+
+      <p style="margin-top:30px;"><strong>Ürün ve Parçalarının Ömrünün Uzaması:</strong></p>
+      <table>
+        <tbody><tr><td>R3: Tekrar Kullanım (Reuse)</td><td>İyi durumda olan ürünün başka bir kullanıcıya geçmesi (takas vb.).</td></tr>
+        <tr><td>R4: Onarma (Repair)</td><td>Arızalı ürünü tamir ederek aynı işlevle tekrar kullanmak.</td></tr>
+        <tr><td>R5: Yenileme (Refurbish)</td><td>Eskiyen ürünü güncelleyerek yeniden kullanılabilir hale getirmek.</td></tr>
+        <tr><td>R6: Yeniden Üretim (Remanufacture)</td><td>Ürünün parçalarını aynı işleve sahip yeni üründe kullanmak.</td></tr>
+        <tr><td>R7: Yeniden Amaçlama (Repurpose)</td><td>Ürün parçalarını farklı bir işlevle yeniden kullanmak.</td></tr>
+      </tbody></table>
+
+      <p style="margin-top:30px;"><strong>Malzemelerin Ömrünün Sonu:</strong></p>
+      <table>
+        <tbody><tr><td>R8: Geri Dönüşüm (Recycle)</td><td>Malzemeyi işleyerek benzer veya düşük kalite ürün elde etmek.</td></tr>
+        <tr><td>R9: Geri Kazanım (Recover)</td><td>Enerji geri kazanımı ile bertaraf.</td></tr>
+      </tbody></table>
+
+      <p style="text-align: center; margin-top: 40px; font-size: 1.2rem;">🌱 <strong>Re-Think</strong>: Geleceği bugünden yeniden düşün!</p>
+    </div>
+  </section>
+
+  <script>
+    async function sendToGemini() {
+      const input = document.getElementById('userInput').value;
+      const responseDiv = document.getElementById('responseArea');
+      
+      if (!input.trim()) {
+        responseDiv.textContent = "Lütfen bir metin girin.";
+        return;
+      }
+
+      responseDiv.textContent = "Yanıt bekleniyor...";
+
+      try {
+        const response = await fetch('http://localhost:8000/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: input
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('API Response:', data); // Debug için API yanıtını konsola yazdır
+        
+        if (data && data.response) {
+          try {
+            // JSON string'ini temizle ve parse et
+            const cleanResponse = data.response.replace(/```json\n?|\n?```/g, '').trim();
+            const jsonResponse = JSON.parse(cleanResponse);
+            
+            // HTML formatında yanıt oluştur
+            let formattedResponse = '<div style="font-family: Arial, sans-serif;">';
+            for (const [key, value] of Object.entries(jsonResponse)) {
+              formattedResponse += `
+                <div style="margin-bottom: 15px;">
+                  <h3 style="color: #2f3e46; margin-bottom: 5px;">${key}</h3>
+                  <p style="margin: 0; line-height: 1.5;">${value}</p>
+                </div>
+              `;
+            }
+            formattedResponse += '</div>';
+            
+            responseDiv.innerHTML = formattedResponse;
+          } catch (parseError) {
+            console.error('Parse Error:', parseError);
+            responseDiv.textContent = data.response;
+          }
+        } else {
+          responseDiv.textContent = "Yanıt alınamadı.";
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        responseDiv.textContent = "Bir hata oluştu. Lütfen tekrar deneyin.";
+      }
+    }
+  </script>
+  <section class="diagonal-section">
+    <div class="blog-content">
+      <h2>Geleceğe Yeşil Bir Yatırım: Yeşil Enerji ve Geri Dönüşümün Hayati Önemi</h2>
+      <p>Günümüzde, insanoğlunun doğa üzerindeki etkisi giderek artarken, sürdürülebilir bir gelecek inşa etmek her zamankinden daha kritik bir hale gelmiştir. Bu noktada, yeşil enerji kaynaklarının kullanımı ve geri dönüşüm uygulamalarının yaygınlaştırılması, gezegenimizin sağlığı ve gelecek nesillerin refahı için hayati birer zorunluluk olarak karşımıza çıkmaktadır.</p>
+      <h3>Yeşil Enerji: Doğanın Gücünden Sürdürülebilir Bir Gelecek</h3>
+      <p>Fosil yakıtların çevreye verdiği zararlar ve sınırlı kaynaklar olduğu gerçeği, enerji üretiminde köklü bir değişimi kaçınılmaz kılmaktadır. İşte tam da bu noktada, güneş, rüzgar, hidroelektrik, jeotermal ve biyokütle gibi yenilenebilir enerji kaynakları, yani yeşil enerji devreye girmektedir...</p>
+      <h3>Geri Dönüşüm: Kaynakları Korumanın ve Atığı Değere Dönüştürmenin Anahtarı</h3>
+      <p>Tüketim alışkanlıklarımız sonucu ortaya çıkan atık miktarı her geçen gün artmaktadır. Bu durum, doğal kaynakların hızla tükenmesine, depolama alanlarının dolmasına ve çevre kirliliğinin artmasına yol açmaktadır. Geri dönüşüm ise bu olumsuz gidişatı tersine çevirmenin en etkili yollarından biridir...</p>
+      <h3>Birlikte Yeşil Bir Geleceğe</h3>
+      <p>Yeşil enerjiye geçiş ve geri dönüşüm uygulamalarının yaygınlaştırılması, bireysel çabaların yanı sıra kamu ve özel sektörün de ortak sorumluluğudur... Yeşil enerji ve geri dönüşüme yapılan her yatırım, aslında geleceğimize yapılan en değerli yatırımdır.</p>
+    </div>
+  </section>
+
+ 
+  <div style="margin: 40px;">
+      <button style="font-size: 1.2rem; padding: 14px 28px; background-color: #84a98c; border-radius: 10px; border: none; color: white; cursor: pointer;">
+        Yeşile Dönüşüm Katkın İçin Teşekkürler!
+      </button>
+    
+  </div>
+
+
+
+</body></html>
