@@ -45,24 +45,3 @@ Frontend, `http://localhost:8000` adresinde çalışan backend API'si ile ileti�
 2. "Gönder" butonuna tıklayın
 3. Chatbot, sorunuzu döngüsel ekonomi prensiplerine göre değerlendirip yanıt verecektir
 
-## 9R İlkeleri
-
-Uygulama, döngüsel ekonominin 9R ilkelerine göre yanıtlar üretir:
-
-1. Reddet (Refuse)
-2. Yeniden Düşün (Rethink)
-3. Azalt (Reduce)
-4. Yeniden Kullanım (Reuse)
-5. Onar (Repair)
-6. Yeniden Üret (Remanufacture)
-7. Geri Dönüştür (Recycle)
-8. Geri Kazan (Recover)
-9. Yeniden Tasarla (Redesign)
-
-## Katkıda Bulunma
-
-1. Bu depoyu fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Bir Pull Request oluşturun 
